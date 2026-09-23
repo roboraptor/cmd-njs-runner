@@ -70,13 +70,14 @@ echo   [%CYAN%9%RESET%] !runprod! Run PROD Server (!PROD_CMD!)
 echo.
 echo   [%YELLOW%C%RESET%] Clean ^& Reinstall dependencies (wipe node_modules)
 echo   [%YELLOW%R%RESET%] Refresh status ^& reload configuration
+echo   [%CYAN%A%RESET%] About ProjectRunner
 echo   [%CYAN%0%RESET%] Exit
 echo.
 echo %BLUE%===================================================================%RESET%
 echo.
 
 set "choice="
-set /p choice="Enter selection [1-9, C, R, 0]: "
+set /p choice="Enter selection [1-9, C, R, A, 0]: "
 if defined choice set "choice=!choice: =!"
 
 if /i "!choice!"=="1" goto check_node
@@ -90,6 +91,7 @@ if /i "!choice!"=="8" goto run_build
 if /i "!choice!"=="9" goto run_prod
 if /i "!choice!"=="C" goto clean_reinstall
 if /i "!choice!"=="R" goto refresh_all
+if /i "!choice!"=="A" goto about_project
 if /i "!choice!"=="0" goto exit_prog
 if /i "!choice!"=="Q" goto exit_prog
 
@@ -727,6 +729,22 @@ call !INSTALL_CMD!
 echo.
 echo %GREEN%[✓] Clean install process finished.%RESET%
 echo.
+echo %BLUE%===================================================================%RESET%
+echo.
+pause
+goto menu
+
+:about_project
+cls
+echo %BLUE%===================================================================%RESET%
+echo %BOLD%About ProjectRunner%RESET%
+echo.
+echo ProjectRunner is a universal, interactive CMD runner and diagnostic
+echo script for NodeJS projects on Windows. It provides a simple, colorful
+echo interface for starting dev/prod servers, managing dependencies,
+echo and validating your environment.
+echo.
+echo GitHub Repository: %CYAN%https://github.com/roboraptor/cmd-njs-runner/%RESET%
 echo %BLUE%===================================================================%RESET%
 echo.
 pause
