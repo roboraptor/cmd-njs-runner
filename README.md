@@ -4,6 +4,8 @@
 
 ProjectRunner provides a visually appealing, colorful interactive interface (menu) running entirely within a single `.bat` file. With just a few keystrokes, you can check your development environment status, pull changes from Git, install dependencies, and run your development or production server. All of this works out of the box with zero third-party dependencies—just standard Windows CMD.
 
+<img width="615" height="506" alt="image" src="https://github.com/user-attachments/assets/2fbde43a-c715-4d3b-8791-ad56399efde1" />
+
 ---
 
 ## ✨ Key Features
