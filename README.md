@@ -16,6 +16,7 @@ ProjectRunner provides a visually appealing, colorful interactive interface (men
 *   **Smarter `.env` Management:** If your project requires environment variables and contains a `.env.example` (or `.sample`), but the actual `.env` file is missing, the script alerts you with a yellow warning badge in the menu. It then offers a one-click option to copy the template and open it in your editor.
 *   **Resilience Against ZIP Downloads:** If you download the project from GitHub as a ZIP archive (missing the `.git` folder), the script detects this. Instead of crashing or throwing errors, it gracefully disables the `git pull` option and displays a helpful explanation.
 *   **Clean & Reinstall:** With a single press of the `C` key, the script can safely wipe your `node_modules` folder and perform a clean reinstallation of all dependencies. This solves 90% of common NodeJS project issues.
+*   **Rebuild flag action:** With a simple .rebuild file in the root, you can remotely rebuild and restart your production server.
 
 ---
 
