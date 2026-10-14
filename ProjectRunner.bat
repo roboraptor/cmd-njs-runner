@@ -622,7 +622,7 @@ goto menu
 
 :run_build
 if exist .rebuild (
-    rmdir /s /q .next >nul 2>nul
+    echo.
 ) else (
     cls
 ) 
@@ -633,6 +633,11 @@ if %errorlevel% neq 0 (
     echo %RED%[✗] Node.js/npm is required to build the application.%RESET%
     pause
     goto menu
+)
+
+if exist .next (
+    echo Cleaning previous build cache...
+    rmdir /s /q .next >nul 2>nul
 )
 
 echo Running: %CYAN%!BUILD_CMD!%RESET%
@@ -715,16 +720,13 @@ echo %BLUE%#### #### REBUILD FLAG FOUND #### ####%RESET%
 echo.
 echo The %YELLOW%Rebuild Flag%RESET% was found.
 echo Rebuilding application...
-timeout /t 1 > nul
 goto run_build
-
 
 :rebuild_flag_done
 del /f /q .rebuild >nul 2>nul
 timeout /t 2 > nul
 set OPEN_BROWSER=false
 goto run_prod
-
 
 :clean_reinstall
 cls
