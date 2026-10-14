@@ -621,7 +621,11 @@ pause
 goto menu
 
 :run_build
-cls
+if exist .rebuild (
+    echo.
+) else (
+    cls
+) 
 echo %BLUE%#### #### BUILDING PRODUCTION BUNDLE #### ####%RESET%
 echo.
 where npm >nul 2>nul
@@ -641,15 +645,21 @@ if !errorlevel! equ 0 (
     echo %GREEN%[✓] Production build completed successfully.%RESET%
     set "builtOK=%CHECK%"
     set "runprod=%PLAYG%"
+    echo.
+    echo %BLUE%===================================================================%RESET%
+    echo.
+    timeout /t 2 > nul
 ) else (
     echo.
     echo %RED%[✗] Build failed. Review errors above.%RESET%
     set "builtOK=%CROSS%"
+    echo.
+    echo %BLUE%===================================================================%RESET%
+    echo.
+    if exist .rebuild del /f /q .rebuild >nul 2>nul
+    pause
 )
-echo.
-echo %BLUE%===================================================================%RESET%
-echo.
-pause
+if exist .rebuild goto rebuild_flag_done
 goto menu
 
 :run_prod
@@ -692,8 +702,28 @@ call !PROD_CMD!
 echo.
 echo %BLUE%===================================================================%RESET%
 echo Production server stopped.
-pause
+timeout /t 2 > nul
+if exist .rebuild (
+    goto rebuild_flag
+)
 goto menu
+
+:rebuild_flag
+cls
+echo %BLUE%#### #### REBUILD FLAG FOUND #### ####%RESET%
+echo.
+echo The %YELLOW%Rebuild Flag%RESET% was found.
+echo Rebuilding application...
+timeout /t 1 > nul
+goto run_build
+
+
+:rebuild_flag_done
+del /f /q .rebuild >nul 2>nul
+timeout /t 2 > nul
+set OPEN_BROWSER=false
+goto run_prod
+
 
 :clean_reinstall
 cls
