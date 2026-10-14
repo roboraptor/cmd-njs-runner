@@ -622,7 +622,7 @@ goto menu
 
 :run_build
 if exist .rebuild (
-    echo.
+    rmdir /s /q .next >nul 2>nul
 ) else (
     cls
 ) 
@@ -664,6 +664,7 @@ goto menu
 
 :run_prod
 cls
+echo.
 echo %BLUE%#### #### STARTING PRODUCTION SERVER #### ####%RESET%
 echo.
 where npm >nul 2>nul
