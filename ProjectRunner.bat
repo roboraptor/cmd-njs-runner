@@ -635,9 +635,9 @@ if %errorlevel% neq 0 (
     goto menu
 )
 
-if exist .next (
-    echo Cleaning previous build cache...
-    rmdir /s /q .next >nul 2>nul
+if exist !BUILD_DIR! (
+    echo Cleaning previous %YELLOW%!BUILD_DIR!%RESET% build cache...
+    rmdir /s /q !BUILD_DIR! >nul 2>nul
 )
 
 echo Running: %CYAN%!BUILD_CMD!%RESET%
