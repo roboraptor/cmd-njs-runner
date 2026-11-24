@@ -33,7 +33,7 @@ ProjectRunner provides a visually appealing, colorful interactive menu running e
 | **`2`** | Check Git environment | Displays Git CLI version, repository state, and active branch (or ZIP notice). |
 | **`3`** | PowerShell Execution Policy | Checks `Get-ExecutionPolicy`; sets `RemoteSigned` (`CurrentUser`) if `Restricted`. |
 | **`4`** | Pull latest changes | Runs `git pull` (or shows helpful update instructions when `.git` is absent). |
-| **`5`** | Install dependencies | Runs the configured install command (default: `npm install`). |
+| **`5`** | Install dependencies | Runs the configured install command (default: `npm install`). Uses `npm_config_loglevel=info` by default so package fetch/install progress is visible (overridable via `InstallCommand`). |
 | **`6`** | Environment variables (`.env`) | View/edit `.env`, copy from `.env.example`/`.env.sample`/`.env.template`, or create a blank `.env`. |
 | **`7`** | Run DEV Server | Opens `DevUrl` in your browser (if enabled) and runs `DevCommand` (`npm run dev`). |
 | **`8`** | Build Production | Cleans the existing build folder (`BuildDir`) and runs `BuildCommand` (`npm run build`). |

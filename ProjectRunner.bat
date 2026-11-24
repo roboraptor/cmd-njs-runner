@@ -498,8 +498,8 @@ if %errorlevel% neq 0 (
 echo Running: %CYAN%!INSTALL_CMD!%RESET%
 echo Please wait, this may take a moment...
 echo.
-call !INSTALL_CMD!
-if !errorlevel! equ 0 (
+call :run_install_cmd
+if !INSTALL_ERR! equ 0 (
     echo.
     echo %GREEN%[✓] Dependencies installed successfully.%RESET%
     set "depenOK=%CHECK%"
@@ -758,14 +758,27 @@ if exist "node_modules" (
 
 echo.
 echo Reinstalling dependencies using: %CYAN%!INSTALL_CMD!%RESET%
-call !INSTALL_CMD!
 echo.
-echo %GREEN%[✓] Clean install process finished.%RESET%
+call :run_install_cmd
+echo.
+if !INSTALL_ERR! equ 0 (
+    echo %GREEN%[✓] Clean install process finished.%RESET%
+) else (
+    echo %RED%[✗] Clean install failed. Check npm error logs above.%RESET%
+)
 echo.
 echo %BLUE%===================================================================%RESET%
 echo.
 pause
 goto menu
+
+:run_install_cmd
+set "PREV_NPM_LOGLEVEL=%npm_config_loglevel%"
+if not defined npm_config_loglevel set "npm_config_loglevel=info"
+call !INSTALL_CMD!
+set "INSTALL_ERR=!errorlevel!"
+set "npm_config_loglevel=!PREV_NPM_LOGLEVEL!"
+exit /b
 
 :about_project
 cls
